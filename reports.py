@@ -4,8 +4,17 @@ def lists_of_games(file_name):
     return mylist
 
 
+list_of_games = lists_of_games('game_stat.txt')
+
+
 def count_games(games_list):
     return len(games_list)
+
+    # count = 0
+    # with open(games_list) as f:
+    #     for i in f:
+    #         count += 1
+    # return count
 
 
 def decide(games_list, year):
@@ -41,12 +50,14 @@ def get_line_number_by_title(games_list, title):
         count += 1
         if title == lst[0]:
             return count
+    raise ValueError("Game not found")
 
 
 def sort_abc(games_list):
     sorted_list = []
     for i in games_list:
-        sorted_list.append(i[0])
+        if i[0] not in sorted_list:
+            sorted_list.append(i[0])
     while True:
         swaped = False
         for i in range(0, len(games_list)-1):
@@ -58,16 +69,22 @@ def sort_abc(games_list):
             return sorted_list
 
 
-def main():
-    list_of_games = lists_of_games('game_stat.txt')
-    # print(list_of_games)
-    # print(count_games(list_of_games))
-    # print(decide(list_of_games, 2004))
-    # print(get_latest(list_of_games))
-    # print(count_by_genre(list_of_games, 'Simulation'))
-    # print(get_line_number_by_title(list_of_games, 'Counter-Strike: Condition Zero'))
-    # print(sort_abc(list_of_games))
+def get_genres(games_list):
+    unique_sorted_list = []
+    for i in games_list:
+        if i[3] not in unique_sorted_list:
+            unique_sorted_list.append(i[3])
+    return sorted(unique_sorted_list)
 
 
-if __name__ == "__main__":
-    main()
+def when_was_top_sold_fps(games_list):
+    copies_sold = 0
+    for i in games_list:
+        i[1] = float(i[1])
+        if i[1] > copies_sold and i[3] == 'First-person shooter':
+            copies_sold = i[1]
+            release_year = i[2]
+    if release_year:
+        return release_year
+    else:
+        raise ValueError("No Such Year")
