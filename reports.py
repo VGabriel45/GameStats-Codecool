@@ -10,12 +10,6 @@ list_of_games = lists_of_games('game_stat.txt')
 def count_games(games_list):
     return len(games_list)
 
-    # count = 0
-    # with open(games_list) as f:
-    #     for i in f:
-    #         count += 1
-    # return count
-
 
 def decide(games_list, year):
     for i in games_list:
@@ -83,7 +77,7 @@ def when_was_top_sold_fps(games_list):
         i[1] = float(i[1])
         if i[1] > copies_sold and i[3] == 'First-person shooter':
             copies_sold = i[1]
-            release_year = i[2]
+            release_year = int(i[2])
     if release_year:
         return release_year
     else:

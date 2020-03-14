@@ -66,8 +66,8 @@ class Tester(unittest.TestCase):
         self.assertEqual(sorted_result, expected_result)
 
     # def test_bonus_1_check_forbidden_functions(self):
-    #     with open("reports.py") as file:
-    #         lines = file.read()
+    #     with open("reports.py") as f:
+    #         lines = f.read()
     #         self.assertNotRegex(lines, r"\bsort(ed)?\(")
 
     def test_bonus_2_get_genres(self):
@@ -78,13 +78,13 @@ class Tester(unittest.TestCase):
 
         self.assertEqual(result, expected_result)
 
-    # def test_bonus_3_when_was_top_sold_fps(self):
-    #     result = reports.when_was_top_sold_fps(self.input_file)
-    #     self.assertEqual(result, 1999)
+    def test_bonus_3_when_was_top_sold_fps(self):
+        result = reports.when_was_top_sold_fps(self.input_file)
+        self.assertEqual(result, 1999)
 
-    # def test_bonus_3_raises_error_when_no_fps_game(self):
-    #     with self.assertRaises(ValueError):
-    #         result = reports.when_was_top_sold_fps("game_stat_nofpstest.txt")
+    def test_bonus_3_raises_error_when_no_fps_game(self):
+        with self.assertRaises(ValueError):
+            result = reports.when_was_top_sold_fps("game_stat_nofpstest.txt")
 
 
 def main():
